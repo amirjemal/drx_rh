@@ -83,7 +83,7 @@
                         var jsonData = XLSX.utils.sheet_to_json(sheet);
 
                         var filteredData = jsonData.filter(function(row) {
-                            return String(row.CIN).toLowerCase() === cin.toLowerCase();
+                            return String(row.Matricule).toLowerCase() === cin.toLowerCase();
                         });
 
                         var messageDisplay = document.getElementById('messageDisplay');
