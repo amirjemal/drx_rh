@@ -66,6 +66,25 @@
 
     <!-- Script JavaScript pour la fonction de recherche -->
     <script>
+        function demo () {
+  // (A) FILE PICKER & READER
+  var picker = document.getElementById("picker"),
+      reader = new FileReader();
+ 
+  // (B) EXCEL ADD ROWS
+  reader.addEventListener("loadend", evt => {
+    // (B1) GET WORKSHEET
+    var workbook = XLSX.read(evt.target.result, {type: "binary"}),
+        worksheet = workbook.Sheets[workbook.SheetNames[0]];
+
+    // (B2) APPEND NEW ROW & FORCE DOWNLOAD
+    XLSX.utils.sheet_add_aoa(worksheet, [["NEW", "ROW"]], {origin: -1});
+    XLSX.writeFile(workbook, "data.xlsx");
+  });
+  reader.readAsArrayBuffer(picker.files[0]);
+  return false;
+}
+
         function add(){
             
                     Excel.run(async (context) => {
