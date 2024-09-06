@@ -64,6 +64,27 @@
 
     <!-- Script JavaScript pour la fonction de recherche -->
     <script>
+        function add(){
+            
+                    Excel.run(async (context) => {
+                        // Charger le fichier Excel (remplacez 'your-file.xlsx' par le nom de votre fichier)
+                        await context.workbook.load('data.xlsx');
+                        
+                        // Sélectionner la feuille de calcul
+                        let sheet = context.workbook.worksheets.getItem("Sheet1");
+                        
+                        // Sélectionner le tableau
+                        let expensesTable = sheet.tables.getItem("Table1");
+                        
+                        // Ajouter une nouvelle ligne
+                        expensesTable.rows.add(null, [
+                            ["2/1/2017", "New Merchant", "New Category", "$200"]
+                        ]);
+                        
+                        // Synchroniser les modifications
+                        await context.sync();
+                    });
+        }
         function search() {
             var cin = document.getElementById('cinInput').value.trim();
 
